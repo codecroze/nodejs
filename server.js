@@ -45,7 +45,7 @@ app.post('/create-user', function(req,res,next){
 	user.email = req.body.email;
 
 //to add it in database
-	user.save(function(){
+	user.save(function(err){
 		if (err) next(err);
 
 		res.json("Success user");

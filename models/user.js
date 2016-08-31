@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 
 var bcrypt = require('bcrypt-nodejs');
 
-var Schema = new mongoose.Schema;
+var Schema =  mongoose.Schema;
 
 //the user schema attributes//characteristics
 var UserSchema = new Schema({

@@ -7,6 +7,12 @@ var morgan = require('morgan');
 
 var mongoose = require('mongoose');
 
+//it take the body of req and parse it to server and what we want it to recieve
+var bodyParser = require('body-parser');
+
+// to use user.js file 
+var User = require('./models/user');
+
 //app is referring to express objects
 var app = express();
 
@@ -22,19 +28,30 @@ mongoose.connect('mongodb://root:abc123@ds019906.mlab.com:19906/ecommerce_site',
 
 //middleware to invoke morgan objects
 app.use(morgan('dev'))
+app.use(bodyParser.json());
 
-//to get whatever is in the url and response
-app.get('/' ,function(req,res){
-	var name = "Shalini"
+//to parse
+app.use(bodyParser.urlencoded({ extended: true}));
 
-	//response the request with this data
-	res.json("My name is " + name);
-});
+//for user profile
+app.post('/create-user', function(req,res,next){
 
-//path localhost:8000/catname/
-app.get('/catname', function(req,res){
-	res.json('batman');
+//to create an instance of User object fro user.js
+	var user = new User();
 
+	//same as in Postman
+	user.profile.name = req.body.name;
+	user.password = req.body.password;
+	user.email = req.body.email;
+
+//to add it in database
+	user.save(function(){
+		if (err) next(err);
+
+		res.json("Success user");
+
+
+	});
 });
 
 //express methods listen is used, to run the app, to know wjhether its running or error is there

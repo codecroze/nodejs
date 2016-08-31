@@ -32,6 +32,8 @@ var UserSchema = new Schema({
 });
 
 
+//var User = mongoose.model('user', UserSchema);
+
 
 //hash the password before saving in DB
 //pre is mongoose method

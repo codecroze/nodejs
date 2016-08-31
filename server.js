@@ -28,12 +28,14 @@ mongoose.connect('mongodb://root:abc123@ds019906.mlab.com:19906/ecommerce_site',
 
 //middleware to invoke morgan objects
 app.use(morgan('dev'))
+
+//middleware to invoke bodyparser objects
 app.use(bodyParser.json());
 
 //to parse
 app.use(bodyParser.urlencoded({ extended: true}));
 
-//for user profile
+//for user profile which will be send to the server
 app.post('/create-user', function(req,res,next){
 
 //to create an instance of User object fro user.js

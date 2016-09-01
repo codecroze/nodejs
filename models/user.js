@@ -71,3 +71,5 @@ UserSchema.methods.comparePassword = function(password){
 
 //to export this whole schema to DB for use 
 module.exports = mongoose.model('User', UserSchema);
+
+

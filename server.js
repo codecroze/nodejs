@@ -10,6 +10,11 @@ var mongoose = require('mongoose');
 //it take the body of req and parse it to server and what we want it to recieve
 var bodyParser = require('body-parser');
 
+var ejs = require('ejs');
+
+//we need this to create webpages
+var engine = require('ejs-mate');
+
 // to use user.js file 
 var User = require('./models/user');
 
@@ -35,6 +40,10 @@ app.use(bodyParser.json());
 //to parse
 app.use(bodyParser.urlencoded({ extended: true}));
 
+app.engine('ejs', engine);
+
+app.set('view engine', 'ejs');
+
 //for user profile which will be send to the server
 app.post('/create-user', function(req,res,next){
 
@@ -48,13 +57,18 @@ app.post('/create-user', function(req,res,next){
 
 //to add it in database
 	user.save(function(err){
-		if (err) next(err);
+		if (err) return next(err);
 
 		res.json("Success user");
 
 
 	});
 });
+
+//url for home.ejs
+app.get('/', function(req,res){
+	res.render('home');
+})
 
 //express methods listen is used, to run the app, to know wjhether its running or error is there
 app.listen(8000, function(err){

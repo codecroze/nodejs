@@ -67,7 +67,12 @@ app.post('/create-user', function(req,res,next){
 
 //url for home.ejs
 app.get('/', function(req,res){
-	res.render('home');
+	res.render('main/home');
+})
+
+//url for about.ejs
+app.get('/about', function(req,res){
+	res.render('main/about');
 })
 
 //express methods listen is used, to run the app, to know wjhether its running or error is there

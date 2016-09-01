@@ -32,6 +32,10 @@ mongoose.connect('mongodb://root:abc123@ds019906.mlab.com:19906/ecommerce_site',
 });
 
 //middleware to invoke morgan objects
+
+//for use of static files in public folder
+app.use(express.static(__dirname+'/public'));
+
 app.use(morgan('dev'))
 
 //middleware to invoke bodyparser objects

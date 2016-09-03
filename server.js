@@ -48,36 +48,14 @@ app.engine('ejs', engine);
 
 app.set('view engine', 'ejs');
 
-//for user profile which will be send to the server
-app.post('/create-user', function(req,res,next){
+//it is a user defined app
+var mainRoutes = require('./routes/main');
 
-//to create an instance of User object fro user.js
-	var user = new User();
+app.use(mainRoutes);
 
-	//same as in Postman
-	user.profile.name = req.body.name;
-	user.password = req.body.password;
-	user.email = req.body.email;
+var userRoutes = require('./routes/user');
 
-//to add it in database
-	user.save(function(err){
-		if (err) return next(err);
-
-		res.json("Success user");
-
-
-	});
-});
-
-//url for home.ejs
-app.get('/', function(req,res){
-	res.render('main/home');
-})
-
-//url for about.ejs
-app.get('/about', function(req,res){
-	res.render('main/about');
-})
+app.use(userRoutes);
 
 //express methods listen is used, to run the app, to know wjhether its running or error is there
 app.listen(8000, function(err){
